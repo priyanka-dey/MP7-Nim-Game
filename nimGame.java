@@ -137,7 +137,7 @@ public class Game {
 		System.out.println ("Heap2: " + heap2);
 		System.out.println ("Heap3: " + heap3);
 		
-		if (c == "Y") {
+		if (c.equals("Y")) {
 			while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
 				userPlays();
 				if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
