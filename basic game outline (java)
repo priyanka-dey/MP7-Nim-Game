@@ -1,19 +1,35 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * 
+ * @author priyankadey
+ * the class that has all the functions.
+ */
 public class Game {
-	
+	/**
+	 * there are 3 heaps in the game. each are initialized with objects between 1 to 10.
+	 */
 	static int heap1 = 1 + (int)(Math.random() * 10); 
 	static int heap2 = 1 + (int)(Math.random() * 10);
 	static int heap3 = 1 + (int)(Math.random() * 10);
 
 	static int whoIsPlaying = 0; // 0 if computer is playing, 1 if player is playing
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return finds the x-or given three inputs.
+	 */
 	public static int findNimSum(int x, int y, int z) {
 		return x^y^z;
 	}
 
+	/**
+	 * all logic for when the player plays.
+	 */
 	public static void userPlays() {
 		System.out.println("Which heap would you like to take objects from?");
 		Scanner heapNumber = new Scanner(System.in);
@@ -56,6 +72,12 @@ public class Game {
 		
 	}
 	
+	/**
+	 * computer finds the nim sum of all heaps (X)
+	 * then finds nimsum of X with each heap
+	 * finds whether or not the sum is less than the heap size.
+	 * makes the heap size equal to the sum.
+	 */
 	public static void computerPlays() {
 		System.out.println("Computer is currently playing...");
 	
@@ -85,6 +107,10 @@ public class Game {
 			
 	}
 	
+	/**
+	 * 
+	 * @return finds the winner.
+	 */
 	public static int findWinner() {
 		if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
 			return whoIsPlaying;
@@ -94,6 +120,11 @@ public class Game {
 		}
 	}
 	
+	
+	/**
+	 * basically just decide who plays first and execute the game.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Have Fun Playing Nim!");
