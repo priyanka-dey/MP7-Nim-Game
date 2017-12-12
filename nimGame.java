@@ -1,12 +1,10 @@
-import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 /**
  * 
- * @author priyankadey
+ * @author priyankadey and soumyakuruvila
  * the class that has all the functions.
  */
-public class Game {
+public class nimGame {
 	/**
 	 * there are 3 heaps in the game. each are initialized with objects between 1 to 10.
 	 */
@@ -15,7 +13,7 @@ public class Game {
 	static int heap3 = 1 + (int)(Math.random() * 10);
 
 	static int whoIsPlaying = 0; // 0 if computer is playing, 1 if player is playing
-	
+		
 	/**
 	 * 
 	 * @param x
@@ -66,9 +64,15 @@ public class Game {
 			
 		}
 		
-		System.out.println ("Heap1: " + heap1);
-		System.out.println ("Heap2: " + heap2);
-		System.out.println ("Heap3: " + heap3);
+		System.out.print("Heap1  ");
+		for (int i = 0; i < heap1; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap2  ");
+		for (int i = 0; i < heap2; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap3  ");
+		for (int i = 0; i < heap3; i++) {System.out.print("***   ");}
+		System.out.println();
 		
 	}
 	
@@ -101,10 +105,87 @@ public class Game {
 		else if (C < heap3) 
 			heap3 = C;
 		
-		System.out.println ("Heap1: " + heap1);
-		System.out.println ("Heap2: " + heap2);
-		System.out.println ("Heap3: " + heap3);
+		System.out.print("Heap1  ");
+		for (int i = 0; i < heap1; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap2  ");
+		for (int i = 0; i < heap2; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap3  ");
+		for (int i = 0; i < heap3; i++) {System.out.print("***   ");}
+		System.out.println();
 			
+	}
+	
+	public static void computerPlaysMysere() {
+		System.out.println("Computer is currently playing...");
+		
+		int totalNimSum = findNimSum(heap1, heap2, heap3);
+		
+		int A = 11, B = 11, C = 11; //larger than any possible number
+		
+		//if none of the stacks are zero then use the normal algorithm
+		if(!(heap1 <= 1 && heap2 <= 1 && heap3 > 1) || (heap1 <= 1 && heap2 > 1 && heap3 <= 1) 
+				|| (heap1 > 1 && heap2 <= 1 && heap3 <= 1)) {
+			// compute all the nim sums assuming the heap size is not 0
+			if (heap1 != 0)
+				A = findNimSum(heap1, totalNimSum, 0);
+			if (heap2 != 0) 
+				B = findNimSum(heap2, totalNimSum, 0);
+			if(heap3 != 0) 
+				C = findNimSum(heap3, totalNimSum, 0);
+			
+			// find the nim sum that's less than the size of the heap and make the heap equal to that one
+			if (A < heap1) 
+				heap1 = A;
+			else if (B < heap2) 
+				heap2 = B;
+			else if (C < heap3) 
+				heap3 = C;
+			
+			System.out.print("Heap1  ");
+			for (int i = 0; i < heap1; i++) {System.out.print("***   ");}
+			System.out.println();
+			System.out.print("Heap2  ");
+			for (int i = 0; i < heap2; i++) {System.out.print("***   ");}
+			System.out.println();
+			System.out.print("Heap3  ");
+			for (int i = 0; i < heap3; i++) {System.out.print("***   ");}
+			System.out.println();
+		} else {
+			if (heap1 > 1) {
+				if (heap2 == 0 || heap3 == 0) {
+					heap1 = 0;
+				} else {
+					heap1 = 1;
+				}
+			}
+			if (heap2 > 1) {
+				if (heap1 == 0 || heap3 == 0) {
+					heap2 = 0;
+				} else {
+					heap2 = 1;
+				}
+			}
+			if (heap3 > 1) {
+				if (heap2 == 0 || heap1 == 0) {
+					heap3 = 0;
+				} else {
+					heap3 = 1;
+				}
+			}
+			
+			System.out.print("Heap1  ");
+			for (int i = 0; i < heap1; i++) {System.out.print("***   ");}
+			System.out.println();
+			System.out.print("Heap2  ");
+			for (int i = 0; i < heap2; i++) {System.out.print("***   ");}
+			System.out.println();
+			System.out.print("Heap3  ");
+			for (int i = 0; i < heap3; i++) {System.out.print("***   ");}
+			System.out.println();
+		}
+		
 	}
 	
 	/**
@@ -120,6 +201,18 @@ public class Game {
 		}
 	}
 	
+	public static int findWinnerMysere() {
+		if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
+			if (whoIsPlaying == 1) {
+				return 0;
+			} else {
+				return 1;
+			}
+		}
+		else {
+			return -1;
+		}
+	}
 	
 	/**
 	 * basically just decide who plays first and execute the game.
@@ -127,48 +220,93 @@ public class Game {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Have Fun Playing Nim!");
-		
-		System.out.println("Enter 'Y' to play first. Enter 'N' to let computer play first.");
+		System.out.println("NIM SUM FUN");
+		System.out.println("Enter 'N' to play the normal Nim Sum. Enter 'M' to play Mysere Nim Sum.");
 		Scanner playFirst = new Scanner(System.in);
 		String c = playFirst.nextLine();
 		
-		System.out.println ("Heap1: " + heap1);
-		System.out.println ("Heap2: " + heap2);
-		System.out.println ("Heap3: " + heap3);
+		System.out.print("Heap1  ");
+		for (int i = 0; i < heap1; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap2  ");
+		for (int i = 0; i < heap2; i++) {System.out.print("***   ");}
+		System.out.println();
+		System.out.print("Heap3  ");
+		for (int i = 0; i < heap3; i++) {System.out.print("***   ");}
+		System.out.println();
 		
-		if (c.equals("Y")) {
-			while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
-				userPlays();
-				if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
-					int winner = findWinner();
-					if (winner != (-1)) {
-						break;
+		if(c.equals("N")) {
+			System.out.println("Enter 'Y' to play first or 'N' for the computer to play first");
+			c = playFirst.nextLine();
+			if (c.equalsIgnoreCase("Y")) {
+				while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
+					userPlays();
+					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
+						int winner = findWinner();
+						if (winner != (-1)) {
+							break;
+						}
 					}
-				}
-			computerPlays();
-			}
-		
-		}
-		else {
-			while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
 				computerPlays();
-				if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
-					int winner = findWinner();
-					if (winner != (-1)) {
-						break;
-					}
 				}
-				userPlays();
+			
 			}
-		
-			switch(whoIsPlaying) {
-			case 0: System.out.println("The winner is: the Computer!! You LOST!");
-					break;
-			case 1: System.out.println("You are the winner! Congrats!!!");
-					break;
+			else {
+				while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
+					computerPlays();
+					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
+						int winner = findWinner();
+						if (winner != (-1)) {
+							break;
+						}
+					}
+					userPlays();
+				}
+			
+				switch(whoIsPlaying) {
+				case 0: System.out.println("The winner is: the Computer!! You LOST!");
+						break;
+				case 1: System.out.println("You are the winner! Congrats!!!");
+						break;
+				}
+			
 			}
-		
+		} else {
+			System.out.println("Enter 'Y' to play first or 'N' for the computer to play first");
+			c = playFirst.nextLine();
+			if (c.equalsIgnoreCase("Y")) {
+				while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
+					userPlays();
+					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
+						int winner = findWinner();
+						if (winner != (-1)) {
+							break;
+						}
+					}
+				computerPlays();
+				}
+			
+			}
+			else {
+				while (((heap1 != 0) || (heap2 != 0) || (heap3 != 0))) {
+					computerPlaysMysere();
+					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
+						int winner = findWinner();
+						if (winner != (-1)) {
+							break;
+						}
+					}
+					userPlays();
+				}
+			
+				switch(whoIsPlaying) {
+				case 0: System.out.println("The winner is: the Computer!! You LOST!");
+						break;
+				case 1: System.out.println("You are the winner! Congrats!!!");
+						break;
+				}
+			
+			}
 		}
 	}
 		
