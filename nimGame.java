@@ -201,18 +201,6 @@ public class nimGame {
 		}
 	}
 	
-	public static int findWinnerMysere() {
-		if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
-			if (whoIsPlaying == 1) {
-				return 0;
-			} else {
-				return 1;
-			}
-		}
-		else {
-			return -1;
-		}
-	}
 	
 	/**
 	 * basically just decide who plays first and execute the game.
@@ -244,10 +232,26 @@ public class nimGame {
 					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
 						int winner = findWinner();
 						if (winner != (-1)) {
+							switch(whoIsPlaying) {
+							case 0: System.out.println("The winner is: the Computer!! You LOST!");
+									break;
+							case 1: System.out.println("You are the winner! Congrats!!!");
+									break;
+							}
 							break;
 						}
 					}
 				computerPlays();
+				int winner = findWinner();
+				if (winner != (-1)) {
+					switch(whoIsPlaying) {
+					case 0: System.out.println("The winner is: the Computer!! You LOST!");
+							break;
+					case 1: System.out.println("You are the winner! Congrats!!!");
+							break;
+					}
+					break;
+				}
 				}
 			
 			}
@@ -257,18 +261,28 @@ public class nimGame {
 					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
 						int winner = findWinner();
 						if (winner != (-1)) {
+							switch(whoIsPlaying) {
+							case 0: System.out.println("The winner is: the Computer!! You LOST!");
+									break;
+							case 1: System.out.println("You are the winner! Congrats!!!");
+									break;
+							}
 							break;
 						}
 					}
 					userPlays();
+					int winner = findWinner();
+					if (winner != (-1)) {
+						switch(whoIsPlaying) {
+						case 0: System.out.println("The winner is: the Computer!! You LOST!");
+								break;
+						case 1: System.out.println("You are the winner! Congrats!!!");
+								break;
+						}
+						break;
+					}
 				}
 			
-				switch(whoIsPlaying) {
-				case 0: System.out.println("The winner is: the Computer!! You LOST!");
-						break;
-				case 1: System.out.println("You are the winner! Congrats!!!");
-						break;
-				}
 			
 			}
 		} else {
@@ -280,10 +294,26 @@ public class nimGame {
 					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
 						int winner = findWinner();
 						if (winner != (-1)) {
+							switch(whoIsPlaying) {
+							case 0: System.out.println("The winner is: the Computer!! You LOST!");
+									break;
+							case 1: System.out.println("You are the winner! Congrats!!!");
+									break;
+							}
 							break;
 						}
 					}
-				computerPlays();
+				computerPlaysMysere();
+				int winner = findWinner();
+				if (winner != (-1)) {
+					switch(whoIsPlaying) {
+					case 0: System.out.println("The winner is: the Computer!! You LOST!");
+							break;
+					case 1: System.out.println("You are the winner! Congrats!!!");
+							break;
+					}
+					break;
+				}
 				}
 			
 			}
@@ -293,17 +323,26 @@ public class nimGame {
 					if ((heap1 == 0) && (heap2 == 0) && (heap3 == 0)) {
 						int winner = findWinner();
 						if (winner != (-1)) {
+							switch(whoIsPlaying) {
+							case 0: System.out.println("The winner is: the Computer!! You LOST!");
+									break;
+							case 1: System.out.println("You are the winner! Congrats!!!");
+									break;
+							}
 							break;
 						}
 					}
 					userPlays();
-				}
-			
-				switch(whoIsPlaying) {
-				case 0: System.out.println("The winner is: the Computer!! You LOST!");
+					int winner = findWinner();
+					if (winner != (-1)) {
+						switch(whoIsPlaying) {
+						case 0: System.out.println("The winner is: the Computer!! You LOST!");
+								break;
+						case 1: System.out.println("You are the winner! Congrats!!!");
+								break;
+						}
 						break;
-				case 1: System.out.println("You are the winner! Congrats!!!");
-						break;
+					}
 				}
 			
 			}
